@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assessment</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+    <h2>CareerPath</h2>
+    <div>
+        <a href="/">Home</a>
+        <a href="/assessment">Assessment</a>
+        <a href="/records">Records</a>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>Career Assessment</h1>
+    <p>Select your skills and interests.</p>
+
+    <form method="POST">
+
+        <label>Full Name</label>
+        <input type="text" name="name" required>
+
+        <label>Course / Branch</label>
+        <input type="text" name="course"
+               placeholder="Computer Engineering" required>
+
+        <h3>Your Skills</h3>
+
+        <div class="options">
+            {% for skill in skills %}
+            <label class="option">
+                <input type="checkbox"
+                       name="skills"
+                       value="{{ skill }}">
+                {{ skill }}
+            </label>
+            {% endfor %}
+        </div>
+
+        <h3>Your Interests</h3>
+
+        <div class="options">
+            {% for interest in interests %}
+            <label class="option">
+                <input type="checkbox"
+                       name="interests"
+                       value="{{ interest }}">
+                {{ interest }}
+            </label>
+            {% endfor %}
+        </div>
+
+        <button type="submit">
+            Get Career Recommendations →
+        </button>
+
+    </form>
+</div>
+
+</body>
+</html>

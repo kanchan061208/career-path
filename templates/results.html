@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <h2>CareerPath</h2>
+        <div>
+            <a href="/">Home</a>
+            <a href="/assessment">Assessment</a>
+            <a href="/records">Records</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Your Career Matches, {{ name }}!</h1>
+        <p>Here are the career paths matching your profile.</p>
+
+        {% for career in recommendations %}
+        <div class="result-card">
+            <h2>{{ career.name }}</h2>
+            <h3>{{ career.score }}% Match</h3>
+
+            <div class="progress">
+                <div style="width: {{ career.score }}%;"></div>
+            </div>
+
+            <p>{{ career.description }}</p>
+
+            <h4>Skills You Have</h4>
+            {% for skill in career.matched %}
+                <span class="chip green">{{ skill }}</span>
+            {% else %}
+                <p>Keep developing your skills.</p>
+            {% endfor %}
+
+            <h4>Skills to Improve</h4>
+            {% for skill in career.missing %}
+                <span class="chip">{{ skill }}</span>
+            {% endfor %}
+
+            <h4>Suggested Courses</h4>
+            <ul>
+                {% for course in career.courses %}
+                <li>{{ course }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+
+        <a class="button" href="/assessment">Retake Assessment</a>
+    </div>
+</body>
+</html>
